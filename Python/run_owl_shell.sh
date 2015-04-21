@@ -8,4 +8,5 @@ else
   PYTHON=ipython
 fi
 
-$PYTHON -i owl/minerva_start.py
+SCRIPTPATH=$(dirname $(readlink -f "${BASH_SOURCE[@]}"))
+$PYTHON -i $SCRIPTPATH/../owl/minerva_start.py

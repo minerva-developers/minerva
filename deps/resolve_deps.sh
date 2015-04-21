@@ -14,9 +14,7 @@ else
 fi
 GIT_CLONE="git clone"
 
-rm -rf deps > /dev/null 2>&1
-mkdir deps
-cd deps
+rm -rf bin build include lib share > /dev/null 2>&1
 INSTALL_DIR=$(pwd)
 mkdir build
 mkdir include

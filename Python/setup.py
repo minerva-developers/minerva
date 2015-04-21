@@ -8,7 +8,7 @@ from setuptools.command.build_ext import build_ext
 
 logging.getLogger().addHandler(logging.StreamHandler())
 logger = logging.getLogger()
-if not os.path.exists(os.path.realpath("owl/owl/libowl.so")):
+if not os.path.exists(os.path.realpath("../owl/owl/libowl.so")):
     logger.error("Fatal: libowl.so not built. Please build c++ library first.")
     sys.exit(1)
 package_data = {'owl': ["libowl.so"]}
@@ -19,7 +19,7 @@ def copy_lib(build_dir, lib_name):
     This command is prior to running a bdist
     """
     root = os.path.dirname(__file__)
-    local = os.path.abspath(os.path.join(root, 'owl', 'owl'))
+    local = os.path.abspath(os.path.join(root, '/../owl', 'owl'))
     try:
         lib = os.path.realpath(os.path.join(build_dir, 'lib', lib_name))
         print ("copying %s -> %s" % (lib, local))
@@ -36,7 +36,7 @@ setup(name='owl',
     maintainer='Minjie Wang',
     maintainer_email='minerva-support@googlegroups.com',
     license='Apache 2.0',
-    url='https://github.com/minerva-developers/minerva',
+    url='https://github.com/dmlc/minerva',
     package_dir={'':'owl'},
     packages=['owl', 'owl.net', 'owl.net.caffe'],
     package_data=package_data,
