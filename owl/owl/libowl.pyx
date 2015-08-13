@@ -178,23 +178,23 @@ cdef class NArray(object):
         return self
 
     @staticmethod
-    def mult(NArray lhs, NArray rhs):
+    def mult(NArray lhs not None, NArray rhs not None):
         return _wrap_cpp_narray(m.Mult(deref(lhs._d), deref(rhs._d)))
 
     @staticmethod
-    def exp(NArray lhs):
+    def exp(NArray lhs not None):
         return _wrap_cpp_narray(m.Exp(deref(lhs._d)))
 
     @staticmethod
-    def ln(NArray lhs):
+    def ln(NArray lhs not None):
         return _wrap_cpp_narray(m.Ln(deref(lhs._d)))
 
     @staticmethod
-    def sigm(NArray lhs):
+    def sigm(NArray lhs not None):
         return _wrap_cpp_narray(m.SigmoidForward(deref(lhs._d)))
 
     @staticmethod
-    def sigm_back(NArray diff, NArray top, NArray bottom):
+    def sigm_back(NArray diff not None, NArray top not None, NArray bottom not None):
         return _wrap_cpp_narray(
                 m.SigmoidBackward(
                     deref(diff._d)
@@ -202,11 +202,14 @@ cdef class NArray(object):
                 ,   deref(bottom._d)))
 
     @staticmethod
-    def relu(NArray lhs):
+    def relu(NArray lhs not None):
         return _wrap_cpp_narray(m.ReluForward(deref(lhs._d)))
 
     @staticmethod
-    def relu_back(NArray diff, NArray top, NArray bottom):
+    def relu_back(
+            NArray diff not None
+        ,   NArray top not None
+        ,   NArray bottom not None):
         return _wrap_cpp_narray(
                 m.ReluBackward(
                     deref(diff._d)
@@ -214,11 +217,14 @@ cdef class NArray(object):
                 ,   deref(bottom._d)))
 
     @staticmethod
-    def tanh(NArray lhs):
+    def tanh(NArray lhs not None):
         return _wrap_cpp_narray(m.TanhForward(deref(lhs._d)))
 
     @staticmethod
-    def tanh_back(NArray diff, NArray top, NArray bottom):
+    def tanh_back(
+            NArray diff not None
+        ,   NArray top not None
+        ,   NArray bottom not None):
         return _wrap_cpp_narray(
                 m.TanhBackward(
                     deref(diff._d)
@@ -226,7 +232,11 @@ cdef class NArray(object):
                 ,   deref(bottom._d)))
 
     @staticmethod
-    def conv_forward(NArray src, NArray filter, NArray bias, ConvInfo info):
+    def conv_forward(
+            NArray src not None
+        ,   NArray filter not None
+        ,   NArray bias not None
+        ,   ConvInfo info not None):
         return _wrap_cpp_narray(
                 m.ConvForward(
                     deref(src._d)
@@ -236,7 +246,10 @@ cdef class NArray(object):
 
     @staticmethod
     def conv_backward_data(
-            NArray diff, NArray bottom, NArray filter, ConvInfo info):
+            NArray diff not None
+        ,   NArray bottom not None
+        ,   NArray filter not None
+        ,   ConvInfo info not None):
         return _wrap_cpp_narray(
                 m.ConvBackwardData(
                     deref(diff._d)
@@ -246,7 +259,10 @@ cdef class NArray(object):
 
     @staticmethod
     def conv_backward_filter(
-            NArray diff, NArray bottom, NArray filter, ConvInfo info):
+            NArray diff not None
+        ,   NArray bottom not None
+        ,   NArray filter not None
+        ,   ConvInfo info not None):
         return _wrap_cpp_narray(
                 m.ConvBackwardFilter(
                     deref(diff._d)
@@ -255,18 +271,22 @@ cdef class NArray(object):
                 ,   deref(info._d)));
 
     @staticmethod
-    def conv_backward_bias(NArray diff):
+    def conv_backward_bias(NArray diff not None):
         return _wrap_cpp_narray(m.ConvBackwardBias(deref(diff._d)));
 
     @staticmethod
-    def softmax_forward(NArray src, SoftmaxAlgorithmWrapper algo):
+    def softmax_forward(NArray src not None, SoftmaxAlgorithmWrapper algo not None):
         return _wrap_cpp_narray(
                 m.SoftmaxForward(
                     deref(src._d)
                 ,   m.ToSoftmaxAlgorithm(algo._d)));
 
     @staticmethod
-    def softmax_backward(NArray diff, NArray top, SoftmaxAlgorithmWrapper algo):
+    def softmax_backward(
+            NArray diff not None
+        ,   NArray top not None
+        ,   SoftmaxAlgorithmWrapper algo not None):
+
         return _wrap_cpp_narray(
                 m.SoftmaxBackward(
                     deref(diff._d)
@@ -274,7 +294,8 @@ cdef class NArray(object):
                 ,   m.ToSoftmaxAlgorithm(algo._d)));
 
     @staticmethod
-    def activation_forward(NArray src, ActivationAlgorithmWrapper algo):
+    def activation_forward(
+            NArray src not None, ActivationAlgorithmWrapper algo not None):
         return _wrap_cpp_narray(
                 m.ActivationForward(
                     deref(src._d)
@@ -282,10 +303,10 @@ cdef class NArray(object):
 
     @staticmethod
     def activation_backward(
-            NArray diff
-        ,   NArray top
-        ,   NArray bottom
-        ,   ActivationAlgorithmWrapper algo):
+            NArray diff not None
+        ,   NArray top not None
+        ,   NArray bottom not None
+        ,   ActivationAlgorithmWrapper algo not None):
         return _wrap_cpp_narray(
                 m.ActivationBackward(
                     deref(diff._d)
@@ -294,7 +315,7 @@ cdef class NArray(object):
                 ,   m.ToActivationAlgorithm(algo._d)));
 
     @staticmethod
-    def pooling_forward(NArray src, PoolingInfo algo):
+    def pooling_forward(NArray src not None, PoolingInfo algo not None):
         return _wrap_cpp_narray(
                 m.PoolingForward(
                     deref(src._d)
@@ -302,10 +323,10 @@ cdef class NArray(object):
 
     @staticmethod
     def pooling_backward(
-            NArray diff
-        ,   NArray top
-        ,   NArray bottom
-        ,   PoolingInfo algo):
+            NArray diff not None
+        ,   NArray top not None
+        ,   NArray bottom not None
+        ,   PoolingInfo algo not None):
         return _wrap_cpp_narray(
                 m.PoolingBackward(
                     deref(diff._d)
@@ -314,7 +335,12 @@ cdef class NArray(object):
                 ,   deref(algo._d)));
 
     @staticmethod
-    def lrn_forward(NArray src, NArray scale, int local_size, float a, float b):
+    def lrn_forward(
+            NArray src not None
+        ,   NArray scale not None
+        ,   int local_size
+        ,   float a
+        ,   float b):
         return _wrap_cpp_narray(
                 m.LRNForward(
                     deref(src._d)
@@ -325,10 +351,10 @@ cdef class NArray(object):
 
     @staticmethod
     def lrn_backward(
-            NArray bottom_data
-        ,   NArray top_data
-        ,   NArray scale
-        ,   NArray top_diff
+            NArray bottom_data not None
+        ,   NArray top_data not None
+        ,   NArray scale not None
+        ,   NArray top_diff not None
         ,   int local_size
         ,   float a
         ,   float b):
