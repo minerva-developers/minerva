@@ -90,6 +90,7 @@ NArray& NArray::operator=(const NArray& other) {
   if (this == &other) {
     return *this;
   }
+  delete data_;
   if (other.data_ == 0) {
     data_ = 0;
   } else {
