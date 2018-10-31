@@ -54,3 +54,4 @@ configure.in
 
 # data files
 *.mat
+.vscode/*
