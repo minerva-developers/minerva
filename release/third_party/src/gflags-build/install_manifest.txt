@@ -1,0 +1,10 @@
+/root/minerva/release/third_party/lib/libgflags.a
+/root/minerva/release/third_party/lib/libgflags_nothreads.a
+/root/minerva/release/third_party/include/gflags/gflags.h
+/root/minerva/release/third_party/include/gflags/gflags_declare.h
+/root/minerva/release/third_party/include/gflags/gflags_completions.h
+/root/minerva/release/third_party/lib/cmake/gflags/gflags-config.cmake
+/root/minerva/release/third_party/lib/cmake/gflags/gflags-config-version.cmake
+/root/minerva/release/third_party/lib/cmake/gflags/gflags-export.cmake
+/root/minerva/release/third_party/lib/cmake/gflags/gflags-export-noconfig.cmake
+/root/minerva/release/third_party/bin/gflags_completions.sh

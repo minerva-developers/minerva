@@ -1,0 +1,3 @@
+repository='https://github.com/dmlc/dmlc-core.git'
+module=''
+tag=''

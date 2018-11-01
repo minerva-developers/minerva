@@ -1,0 +1,1 @@
+cmd='/usr/bin/cmake;-DCMAKE_INSTALL_PREFIX=/root/minerva/release/third_party;-DCMAKE_CXX_FLAGS=-fPIC;-GUnix Makefiles;/root/minerva/third_party/gflags-2.1.1'

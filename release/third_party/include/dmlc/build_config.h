@@ -1,0 +1,49 @@
+/*!
+ * Copyright (c) 2018 by Contributors
+ * \file build_config.h
+ * \brief Default detection logic for fopen64 and other symbols.
+ *        May be overriden by CMake
+ * \author KOLANICH
+ */
+#ifndef DMLC_BUILD_CONFIG_H_
+#define DMLC_BUILD_CONFIG_H_
+
+/* default logic for fopen64 */
+#if DMLC_USE_FOPEN64 && \
+  (!defined(__GNUC__) || (defined __ANDROID__) || (defined __FreeBSD__) \
+  || (defined __APPLE__) || ((defined __MINGW32__) && !(defined __MINGW64__)) \
+  || (defined __CYGWIN__) )
+  #define DMLC_EMIT_FOPEN64_REDEFINE_WARNING
+  #define fopen64 std::fopen
+#endif
+
+/* default logic for locale functionality */
+#if (defined _WIN32) && !(defined __CYGWIN__)
+
+  #define DMLC_CREATE_LOCALE_PRESENT
+  #define DMLC_STRTOD_L_PRESENT
+  #define DMLC_WIN32_FREE_LOCALE_PRESENT
+
+#else
+
+  #define DMLC_USE_LOCALE_PRESENT
+  #define DMLC_NEW_LOCALE_PRESENT
+  #define DMLC_FREE_LOCALE_PRESENT
+
+#endif
+
+/* default logic for stack trace */
+#if (defined(__GNUC__) && !defined(__MINGW32__)\
+     && !defined(__sun) && !defined(__SVR4)\
+     && !(defined __MINGW64__) && !(defined __ANDROID__))\
+     && !defined(__CYGWIN__)
+  #define DMLC_LOG_STACK_TRACE 1
+  #define DMLC_LOG_STACK_TRACE_SIZE 10
+#endif
+
+/* default logic for detecting existence of nanosleep() */
+#if !(defined _WIN32) || (defined __CYGWIN__)
+  #define DMLC_NANOSLEEP_PRESENT
+#endif
+
+#endif  // DMLC_BUILD_CONFIG_H_
